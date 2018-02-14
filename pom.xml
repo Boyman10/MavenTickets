@@ -1,65 +1,162 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.oc.tickets</groupId>
-  <artifactId>ticket</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+	<groupId>org.oc.tickets</groupId>
+	<artifactId>ticket</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-  <name>ticket</name>
-  <url>http://maven.apache.org</url>
- <description>Tickets management system</description>
- 
- 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+	<name>ticket</name>
+	<url>http://maven.apache.org</url>
+	<description>Tickets management system</description>
 
- 
-  <modules>
-  	<module>ticket-batch</module>
-  	<module>ticket-webapp</module>
-  	<module>ticket-business</module>
-  	<module>ticket-consumer</module>
-  	<module>ticket-model</module>
-  </modules>
-  
-      <!-- =============================================================== -->
-    <!-- Dependency management -->
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+
+	<modules>
+		<module>ticket-batch</module>
+		<module>ticket-webapp</module>
+		<module>ticket-business</module>
+		<module>ticket-consumer</module>
+		<module>ticket-model</module>
+	</modules>
     <!-- =============================================================== -->
-    <dependencyManagement>
-        <dependencies>
-            <!-- ===== Modules ===== -->
-            <dependency>
-                <groupId>org.oc.tickets</groupId>
-                <artifactId>ticket-batch</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.oc.tickets</groupId>
-                <artifactId>ticket-webapp</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.oc.tickets</groupId>
-                <artifactId>ticket-business</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.oc.tickets</groupId>
-                <artifactId>ticket-consumer</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.oc.tickets</groupId>
-                <artifactId>ticket-model</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+    <!-- Profils -->
+    <!-- =============================================================== -->
+    <profiles>
+        <!-- Profil pour l'environnement de développement -->
+        <profile>
+            <id>target-dev</id>
+        </profile>
 
+        <!-- Profil pour l'environnement de test -->
+        <profile>
+            <id>target-test</id>
+        </profile>
 
-        </dependencies>
-    </dependencyManagement>
+        <!-- Profil pour l'environnement de production -->
+        <profile>
+            <id>target-prod</id>
+        </profile>
+    </profiles>
+	<!-- =============================================================== -->
+	<!-- Dependency management -->
+	<!-- =============================================================== -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- ===== Modules ===== -->
+			<dependency>
+				<groupId>org.oc.tickets</groupId>
+				<artifactId>ticket-batch</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.oc.tickets</groupId>
+				<artifactId>ticket-webapp</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.oc.tickets</groupId>
+				<artifactId>ticket-business</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.oc.tickets</groupId>
+				<artifactId>ticket-consumer</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.oc.tickets</groupId>
+				<artifactId>ticket-model</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.1.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.bval</groupId>
+				<artifactId>bval-jsr</artifactId>
+				<version>1.1.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- =============================================================== -->
+	<!-- Build -->
+	<!-- =============================================================== -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>org.oc.tickets.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.4.1</version>
+				<executions>
+					<execution>
+						<!-- je choisis un nom unique pour définir cette exécution -->
+						<id>enforce-profile-target</id>
+						<!-- je branche l'exécution à la phase "validate" -->
+						<phase>validate</phase>
+						<!-- cette exécution lancera le goal "enforce" -->
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<!-- La configuration du plugin propre à cette exécution -->
+						<configuration>
+							<rules>
+								<requireActiveProfile>
+									<profiles>target-dev,target-test,target-prod</profiles>
+									<all>false</all>
+								</requireActiveProfile>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
