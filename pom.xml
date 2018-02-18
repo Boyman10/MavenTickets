@@ -27,6 +27,17 @@
 		<module>ticket-model</module>
 	</modules>
 
+    <!-- =============================================================== -->
+    <!-- DistributionManagement -->
+    <!-- =============================================================== -->
+    <distributionManagement>
+        <site>
+            <id>site-projet</id>
+            <url>scp://localhost/tickets/</url>
+        </site>
+    </distributionManagement>
+
+
 	<!-- =============================================================== -->
 	<!-- Dependency management -->
 	<!-- =============================================================== -->
@@ -85,6 +96,21 @@
 		</dependencies>
 	</dependencyManagement>
 
+
+    <!-- =============================================================== -->
+    <!-- Gestion des rapports -->
+    <!-- =============================================================== -->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+        </plugins>
+    </reporting>
+    
+    
 	<!-- =============================================================== -->
 	<!-- Build -->
 	<!-- =============================================================== -->
@@ -111,6 +137,21 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
+                
+                    <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.6</version>
+                    <configuration>
+                        <!-- Je veux le site en français -->
+                        <locales>fr</locales>
+                    </configuration>
+                    </plugin>
             </plugins>
 
 	</build>

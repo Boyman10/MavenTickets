@@ -14,6 +14,7 @@
 	<packaging>war</packaging>
 	<name>ticket-webapp Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
 	<dependencies>
 		<!-- https://openclassrooms.com/courses/organisez-et-packagez-une-application-java-avec-apache-maven/gerez-efficacement-les-dependances -->
 		<dependency>
@@ -62,6 +63,32 @@
         <!-- Profil pour l'environnement de production -->
         <profile>
             <id>target-prod</id>
+            <build>
+            <plugins>
+            			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.4.1</version>
+				<executions>
+				<execution>
+					<id>enforce-no-snapshot-prod</id>
+					<phase>validate</phase>
+					<goals>
+					<goal>enforce</goal>
+					</goals>
+					<configuration>
+					<rules>
+						<requireReleaseVersion />
+
+
+						<requireReleaseDeps />
+					</rules>
+					</configuration>
+					</execution>
+				</executions>
+			</plugin>  
+            </plugins>
+            </build>
         </profile>
     </profiles>
     
